@@ -25,7 +25,7 @@ const CategoryCard: React.FC<{ category: CategoryCardProps }> = ({ category }) =
                 {category.children.slice(0, 4).map((child) => (
                     <div
                         key={child.id}
-                        className="flex flex-col items-center text-center border rounded-lg p-3 hover:shadow-md transition"
+                        className="flex flex-col items-center text-center p-3 hover:shadow-md transition"
                     >
                         <Image
                             src={child.image || "https://picsum.photos/id/180/200/200"}

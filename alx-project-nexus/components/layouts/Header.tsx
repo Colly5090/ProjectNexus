@@ -9,6 +9,7 @@ import type { DebouncedFunc } from "lodash";
 
 const Header: React.FC<SearchProp> = ({ onSearch }) => {
     const [query, setQuery] = useState("");
+    const [showMobileMenu, setShowMobileMenu] = useState(false);
 
     // ✅ Debounced Search (Desktop only)
     const debouncedSearch: DebouncedFunc<(value: string) => void> = useMemo(
@@ -20,9 +21,7 @@ const Header: React.FC<SearchProp> = ({ onSearch }) => {
     );
 
     useEffect(() => {
-        return () => {
-            debouncedSearch.cancel();
-        };
+        return () => debouncedSearch.cancel();
     }, [debouncedSearch]);
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,6 +39,8 @@ const Header: React.FC<SearchProp> = ({ onSearch }) => {
         }
     };
 
+    const toggleMobileMenu = () => setShowMobileMenu((prev) => !prev);
+
     return (
         <header className="w-full border-b border-gray-400 shadow-md px-4 py-2">
             <div className="mx-auto flex max-w-7xl items-center justify-between">
@@ -51,7 +52,7 @@ const Header: React.FC<SearchProp> = ({ onSearch }) => {
                     </Link>
                 </div>
 
-                {/* Center: Nav Links (hidden on mobile) */}
+                {/* Center: Desktop Nav */}
                 <nav className="hidden flex-1 justify-center gap-8 md:flex">
                     <Link href="/categories/catalog" className="hover:text-gray-600">Catalog</Link>
                     <Link href="/products/most-wanted" className="hover:text-gray-600">Most Wanted</Link>
@@ -61,7 +62,7 @@ const Header: React.FC<SearchProp> = ({ onSearch }) => {
 
                 {/* Right: Search + Icons */}
                 <div className="flex basis-4/5 md:flex-1 items-center justify-between md:justify-end gap-4">
-                    {/* Search (mobile: input hidden, icon shown only) */}
+                    {/* Search */}
                     <div className="flex-1 flex items-center gap-2 border rounded-md px-2 py-1 md:flex-none md:w-auto">
                         <MagnifyingGlassIcon className="h-6 w-6 md:h-5 md:w-5 text-gray-500" />
                         <input
@@ -74,18 +75,33 @@ const Header: React.FC<SearchProp> = ({ onSearch }) => {
                         />
                     </div>
 
-                    {/* Cart + User (hidden on mobile) */}
+                    {/* Desktop Cart + User */}
                     <ShoppingCartIcon className="hidden h-6 w-6 text-gray-700 md:block" />
                     <UserIcon className="hidden h-6 w-6 text-gray-700 md:block" />
 
                     {/* Hamburger (mobile only) */}
-                    <button className="md:hidden">
+                    <button className="md:hidden" onClick={toggleMobileMenu}>
                         <Bars3Icon className="h-7 w-7 text-gray-700" />
                     </button>
                 </div>
             </div>
+
+            {/* Mobile Menu */}
+            {showMobileMenu && (
+                <div className="md:hidden mt-2 flex flex-col gap-2 px-4 pb-4 border-t border-gray-300">
+                    <Link href="/categories/catalog" className="hover:text-gray-600" onClick={() => setShowMobileMenu(false)}>Catalog</Link>
+                    <Link href="/products/most-wanted" className="hover:text-gray-600" onClick={() => setShowMobileMenu(false)}>Most Wanted</Link>
+                    <Link href="/products/new-arrival" className="hover:text-gray-600" onClick={() => setShowMobileMenu(false)}>New Arrival</Link>
+                    <Link href="/products/brands" className="hover:text-gray-600" onClick={() => setShowMobileMenu(false)}>Brands</Link>
+
+                    <div className="flex gap-4 mt-2">
+                        <ShoppingCartIcon className="h-6 w-6 text-gray-700" />
+                        <UserIcon className="h-6 w-6 text-gray-700" />
+                    </div>
+                </div>
+            )}
         </header>
     );
-}
+};
 
 export default Header;
