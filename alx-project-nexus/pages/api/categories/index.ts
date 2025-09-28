@@ -9,7 +9,14 @@ export default async function handler(
   try {
     const { data } = await axios.get(`${API_BASE}/products/categories/`);
     res.status(200).json(data);
-  } catch (error: any) {
-    res.status(500).json({ error: "Failed to fetch categories" });
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      console.error("API error:", error.response?.data || error.message);
+    } else if (error instanceof Error) {
+      console.error("Unexpected error:", error.message);
+    } else {
+      console.error("Unknown error:", error);
+    }
+    res.status(500).json({ message: "Failed" });
   }
 }

@@ -1,6 +1,6 @@
 // lib/getCategories.ts
 import axios from "axios";
-import { CategoryCardProps } from "@/interfaces";
+import { CategoryCardProps, CategoryChild } from "@/interfaces";
 import { API_BASE } from "@/constants";
 
 export async function getCategoriesWithChildren(): Promise<
@@ -15,7 +15,7 @@ export async function getCategoriesWithChildren(): Promise<
 
   // Step 2: For each featured category, fetch its children
   const categories: CategoryCardProps[] = await Promise.all(
-    limited.map(async (cat: any) => {
+    limited.map(async (cat: CategoryChild) => {
       const { data: categoryChildren } = await axios.get(
         `${API_BASE}/products/categories/${cat.id}`
       );

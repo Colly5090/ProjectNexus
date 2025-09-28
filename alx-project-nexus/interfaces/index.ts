@@ -1,19 +1,5 @@
 import { StaticImageData } from "next/image";
 
-export interface ProductCardProps {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  category_id: number;
-  rating: number;
-  stock: number;
-  created_at: string;
-  updated_at: string;
-  cursor: string;
-}
-
 export interface ProductProp {
   id: string;
   name: string;
@@ -31,6 +17,8 @@ export interface ProductProp {
   is_featured: boolean;
   is_in_stock: boolean;
   average_rating?: string;
+  created_at?: string;
+  category_name?: string;
 }
 
 export interface HeroCardProps {
@@ -85,11 +73,15 @@ export interface ProductContextType {
 }
 
 export interface CategoryChild {
-  id: number;
+  id: string;
   name: string;
   slug?: string;
-  image?: string;
+  image?: string | null;
+  description?: string;
+  children?: CategoryChild[];
 }
+
+export interface Category extends CategoryChild {}
 
 export interface CategoryCardProps {
   id?: number;

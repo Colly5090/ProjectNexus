@@ -1,13 +1,14 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useCategory } from "@/hook/useCategory";
+import { Category } from "@/interfaces";
 
 export default function CategoryPage() {
     const router = useRouter();
     const { id } = router.query;
 
     const { fetchCategoryById, loading, error } = useCategory();
-    const [category, setCategory] = useState<any>(null);
+    const [category, setCategory] = useState<Category | null>(null);
 
     useEffect(() => {
         if (!id) return;
@@ -30,7 +31,7 @@ export default function CategoryPage() {
 
             {/* List all children */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {category?.children?.map((child: any) => (
+                {category?.children?.map((child) => (
                     <div
                         key={child.id}
                         className="border p-4 rounded-lg cursor-pointer hover:shadow-md"

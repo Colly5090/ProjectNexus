@@ -3,19 +3,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { BRAND_ICON } from "@/constants";
 import { SearchProp } from "@/interfaces";
-import { useState, useCallback } from "react";
+import { useState, useMemo, useEffect } from "react";
 import debounce from "lodash.debounce";
+import type { DebouncedFunc } from "lodash";
 
 const Header: React.FC<SearchProp> = ({ onSearch }) => {
     const [query, setQuery] = useState("");
 
     // ✅ Debounced Search (Desktop only)
-    const debouncedSearch = useCallback(
-        debounce((value: string) => {
-            onSearch?.(value);
-        }, 500),
+    const debouncedSearch: DebouncedFunc<(value: string) => void> = useMemo(
+        () =>
+            debounce((value: string) => {
+                onSearch?.(value);
+            }, 500),
         [onSearch]
     );
+
+    useEffect(() => {
+        return () => {
+            debouncedSearch.cancel();
+        };
+    }, [debouncedSearch]);
 
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
