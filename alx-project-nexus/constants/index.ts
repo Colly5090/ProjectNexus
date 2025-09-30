@@ -9,8 +9,7 @@ export const MASTERCARD = mastercard;
 export const VISA = visa;
 export const PAYPAL = paypal;
 
-export const API_BASE =
-  "https://project-nexus-backend-q5ai.onrender.com/api/v1";
+export const API_BASE: string = process.env.NEXT_PUBLIC_API_BASE || "";
 
 export const heroItems: HeroItem[] = [
   {
