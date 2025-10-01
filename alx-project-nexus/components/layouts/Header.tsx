@@ -6,10 +6,13 @@ import { SearchProp } from "@/interfaces";
 import { useState, useMemo, useEffect } from "react";
 import debounce from "lodash.debounce";
 import type { DebouncedFunc } from "lodash";
+import InstallInstructions from "@/components/InstallInstructions";
+import Modal from "@/components/Modal";
 
 const Header: React.FC<SearchProp> = ({ onSearch }) => {
     const [query, setQuery] = useState("");
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+    const [isInstallOpen, setInstallOpen] = useState(false);
 
     // ✅ Debounced Search (Desktop only)
     const debouncedSearch: DebouncedFunc<(value: string) => void> = useMemo(
@@ -53,11 +56,12 @@ const Header: React.FC<SearchProp> = ({ onSearch }) => {
                 </div>
 
                 {/* Center: Desktop Nav */}
-                <nav className="hidden flex-1 justify-center gap-8 md:flex">
+                <nav className="hidden flex-1 justify-center gap-8 md:flex md:justify-between md:gap-4">
                     <Link href="/categories/catalog" className="hover:text-gray-600">Catalog</Link>
                     <Link href="/products/most-wanted" className="hover:text-gray-600">Most Wanted</Link>
                     <Link href="/products/new-arrival" className="hover:text-gray-600">New Arrival</Link>
                     <Link href="/products/brands" className="hover:text-gray-600">Brands</Link>
+                    <button onClick={() => setInstallOpen(true)} className="hover:text-gray-600 text-green-700">Install App</button>
                 </nav>
 
                 {/* Right: Search + Icons */}
@@ -97,9 +101,14 @@ const Header: React.FC<SearchProp> = ({ onSearch }) => {
                     <div className="flex gap-4 mt-2">
                         <ShoppingCartIcon className="h-6 w-6 text-gray-700" />
                         <UserIcon className="h-6 w-6 text-gray-700" />
+                        <button onClick={() => setInstallOpen(true)} className="hover:text-gray-600">Install App</button>
                     </div>
                 </div>
             )}
+
+            <Modal isOpen={isInstallOpen} onClose={() => setInstallOpen(false)}>
+                <InstallInstructions />
+            </Modal>
         </header>
     );
 };
