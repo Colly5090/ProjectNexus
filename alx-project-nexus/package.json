@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@ducanh2912/next-pwa": "^10.2.9",
     "@heroicons/react": "^2.2.0",
     "axios": "^1.12.2",
     "lodash.debounce": "^4.0.8",
@@ -26,6 +27,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "webpack": "^5.102.0"
   }
 }
