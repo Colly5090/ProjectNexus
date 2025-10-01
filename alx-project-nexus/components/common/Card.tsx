@@ -1,28 +1,39 @@
 import Image from "next/image";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { ProductProp } from "@/interfaces";
+import { productImageFallbacks } from "@/constants";
 
 const ProductCard: React.FC<{ product: ProductProp }> = ({ product }) => {
   return (
     <div className="cursor-pointer bg-white p-2 shadow-sm transition rounded-lg">
       {/* Product Image */}
-      <div className="relative h-48 w-full overflow-hidden rounded-md">
+      <div className="relative h-48 w-full overflow-hidden rounded-md aspect-[1/1]">
         <Image
-          src={product.featured_image || "https://picsum.photos/300/300"}
+          src={product.featured_image || productImageFallbacks[product.category_name] || "https://picsum.photos/300/300"}
           alt={product.name}
-          width={300}
-          height={300}
+          fill
           className="object-cover transition-transform duration-300 hover:scale-105"
         />
+
+        <div className="absolute top-2 left-2 right-2 flex justify-between items-center">
+          {product.discount_percentage && (
+            <span className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded">
+              -{Math.round(product.discount_percentage)}%
+            </span>
+          )}
+          {product.is_featured && (
+            <span className="bg-teal-600 text-white text-xs font-semibold px-2 py-1 rounded">
+              Featured
+            </span>
+          )}
+        </div>
+
       </div>
 
       {/* Product Info */}
       <div className="mt-3 flex items-start justify-between">
-        <h3 className="line-clamp-1 font-semibold text-lg text-gray-800">
-          {product.name}{" "}
-          {product.is_featured && (
-            <span className="text-sm text-teal-600 font-normal">Featured</span>
-          )}
+        <h3 className="font-semibold text-lg text-gray-800">
+          {product.name}
         </h3>
 
         <div className="flex items-center">
