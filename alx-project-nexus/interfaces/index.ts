@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image";
+import { ReactNode } from "react";
 
 export interface ProductProp {
   id: string;
@@ -18,13 +19,16 @@ export interface ProductProp {
   is_in_stock: boolean;
   average_rating?: string;
   created_at?: string;
-  category_name?: string;
+  category_name: string;
+  discount_percentage?: number;
 }
 
 export interface HeroCardProps {
   image: string;
   title: string;
   description: string;
+  cta: string;
+  href: string;
 }
 
 export type HeroItem = HeroCardProps;
@@ -105,4 +109,17 @@ export interface CatalogProps {
   icon?: string;
   product_count?: number;
   children_count?: number;
+}
+
+export type Platform =
+  | "android"
+  | "ios-safari"
+  | "ios-other"
+  | "desktop"
+  | null;
+
+export interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: ReactNode;
 }
