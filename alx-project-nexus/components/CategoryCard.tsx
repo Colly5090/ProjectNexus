@@ -15,7 +15,7 @@ const CategoryCard: React.FC<{ category: CategoryCardProps }> = ({ category }) =
     }
 
     return (
-        <div className="w-full mx-auto bg-white shadow-lg rounded-2xl p-6 mb-4"
+        <div className="w-full mx-auto bg-white shadow-lg p-2 mb-4"
             onClick={handleNavigate}>
             {/* Title */}
             <h1 className="text-lg md:text-2xl font-medium md:font-bold mb-6">{title}</h1>
@@ -25,16 +25,17 @@ const CategoryCard: React.FC<{ category: CategoryCardProps }> = ({ category }) =
                 {category.children.slice(0, 4).map((child) => (
                     <div
                         key={child.id}
-                        className="flex flex-col items-center text-center p-3 hover:shadow-md transition"
+                        className="flex flex-col items-center text-center p-1 hover:shadow-md transition"
                     >
-                        <Image
-                            src={child.image || "https://picsum.photos/id/180/200/200"}
-                            alt={child.name}
-                            width={200}
-                            height={200}
-                            className="object-cover rounded-md"
-                        />
-                        <p className="mt-2 text-sm font-normal md:font-medium">{child.name}</p>
+                        <div className="w-full aspect-[1/1] overflow-hidden relative">
+                            <Image
+                                src={categoryDisplay[category.slug]?.childImages?.[child.name.trim()] || child.image || "https://picsum.photos/id/180/200/200"}
+                                alt={child.name}
+                                fill
+                                className="object-cover rounded-md"
+                            />
+                        </div>
+                        <p className="mt-2 text-xs md:text-sm font-medium">{child.name}</p>
                     </div>
                 ))}
             </div>
