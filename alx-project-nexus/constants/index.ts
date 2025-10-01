@@ -3,8 +3,10 @@ import mastercard from "@/public/assets/images/mastercard.png";
 import visa from "@/public/assets/images/visa.png";
 import paypal from "@/public/assets/images/paypal.png";
 import { HeroItem } from "@/interfaces";
+import splash_icon from "@/public/assets/icons/android-chrome-192x192.png";
 
 export const BRAND_ICON = brand_icon;
+export const SPLASH_ICON = splash_icon;
 export const MASTERCARD = mastercard;
 export const VISA = visa;
 export const PAYPAL = paypal;
