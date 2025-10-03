@@ -6,8 +6,8 @@ import { SearchProp } from "@/interfaces";
 import { useState, useMemo, useEffect } from "react";
 import debounce from "lodash.debounce";
 import type { DebouncedFunc } from "lodash";
-import InstallInstructions from "@/components/InstallInstructions";
-import Modal from "@/components/Modal";
+import InstallInstructions from "@/components/pwa/InstallInstructions";
+import Modal from "@/components/pwa/Modal";
 
 const Header: React.FC<SearchProp> = ({ onSearch }) => {
     const [query, setQuery] = useState("");
@@ -101,7 +101,7 @@ const Header: React.FC<SearchProp> = ({ onSearch }) => {
                     <div className="flex gap-4 mt-2">
                         <ShoppingCartIcon className="h-6 w-6 text-gray-700" />
                         <UserIcon className="h-6 w-6 text-gray-700" />
-                        <button onClick={() => setInstallOpen(true)} className="hover:text-gray-600">Install App</button>
+                        <button onClick={() => { setInstallOpen(true); setShowMobileMenu(true); }} className="hover:text-gray-600 text-green-700">Install App</button>
                     </div>
                 </div>
             )}

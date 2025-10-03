@@ -1,4 +1,4 @@
-import ProductCard from "@/components/common/Card";
+import ProductCard from "@/components/common/ProductCard";
 import FilterSortBar from "@/components/FilterSort";
 import HeroSection from "@/components/hero/HeroSection";
 import { useProductContext } from "@/context/ProductContext";

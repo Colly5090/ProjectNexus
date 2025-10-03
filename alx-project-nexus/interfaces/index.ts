@@ -123,3 +123,9 @@ export interface ModalProps {
   onClose: () => void;
   children: ReactNode;
 }
+
+export interface SplashProps {
+  visible: boolean;
+  durationMs?: number;
+  onFinish?: () => void;
+}

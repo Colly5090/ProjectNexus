@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { useProductContext } from "@/context/ProductContext";
-import ProductCard from "@/components/common/Card";
+import ProductCard from "@/components/common/ProductCard";
 
-const ProductFilterPage = () => {
+const ProductFilterPage: React.FC = () => {
     const router = useRouter();
     const { filter } = router.query;
 

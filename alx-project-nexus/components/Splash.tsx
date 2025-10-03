@@ -1,14 +1,9 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import { SPLASH_ICON } from "@/constants";
+import { SplashProps } from "@/interfaces";
 
-type SplashProps = {
-    visible: boolean;
-    durationMs?: number;
-    onFinish?: () => void;
-};
-
-export default function Splash({ visible, durationMs = 4000, onFinish }: SplashProps) {
+const Splash: React.FC<SplashProps> = ({ visible, durationMs = 4000, onFinish }) => {
     useEffect(() => {
         if (!visible) return;
 
@@ -20,17 +15,15 @@ export default function Splash({ visible, durationMs = 4000, onFinish }: SplashP
         }, durationMs);
 
         return () => {
-            clearTimeout(timer)
-            document.body.style.overflow = 'auto';
+            clearTimeout(timer);
+            document.body.style.overflow = "auto";
         };
     }, [visible, durationMs, onFinish]);
 
     if (!visible) return null;
 
     return (
-        <div
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-white transition-opacity"
-        >
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white transition-opacity">
             <div className="flex flex-col items-center gap-4">
                 {/* Logo */}
                 <div className="rounded-full bg-gradient-to-r from-teal-400 to-pink-500 p-4 shadow-xl flex items-center justify-center animate-pulse-scale">
@@ -60,4 +53,6 @@ export default function Splash({ visible, durationMs = 4000, onFinish }: SplashP
             </div>
         </div>
     );
-}
+};
+
+export default Splash;

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BRAND_ICON, MASTERCARD, VISA, PAYPAL } from "@/constants";
 
-export default function Footer() {
+const Footer: React.FC = () => {
     const [openSection, setOpenSection] = useState<string | null>(null);
 
     const toggleSection = (section: string) => {
@@ -68,3 +68,5 @@ export default function Footer() {
         </footer>
     );
 }
+
+export default Footer;

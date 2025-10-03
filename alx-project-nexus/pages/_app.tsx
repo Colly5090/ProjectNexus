@@ -4,7 +4,7 @@ import Layout from "@/components/layouts/Layout";
 import { ProductProvider } from "@/context/ProductContext";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Splash from "@/components/Splash";
 
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useCategory } from "@/hook/useCategory";
 import { Category } from "@/interfaces";
 
-export default function CategoryPage() {
+const CategoryPage: React.FC = () => {
     const router = useRouter();
     const { id } = router.query;
 
@@ -45,3 +45,5 @@ export default function CategoryPage() {
         </div>
     );
 }
+
+export default CategoryPage;

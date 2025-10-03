@@ -4,7 +4,7 @@ import { SortOption } from "@/interfaces";
 import Overlay from "./Overlay";
 import { useState } from "react";
 
-export default function FilterSortBar() {
+const FilterSortBar: React.FC = () => {
     const { setSort, sort, setMinPrice, setMaxPrice, setInStock } = useProductContext();
     const [showOverlay, setShowOverlay] = useState(false);
 
@@ -56,3 +56,5 @@ export default function FilterSortBar() {
         </div>
     );
 }
+
+export default FilterSortBar;

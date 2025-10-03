@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { OverlayProps } from "@/interfaces";
 
-export default function Overlay({ onClose, onApply, initialFilters }: OverlayProps) {
+const Overlay: React.FC<OverlayProps> = ({ onClose, onApply, initialFilters }) => {
     const [minPrice, setMinPrice] = useState<number | null>(initialFilters.minPrice);
     const [maxPrice, setMaxPrice] = useState<number | null>(initialFilters.maxPrice);
     const [inStock, setInStock] = useState<boolean | null>(initialFilters.inStock);
@@ -68,4 +68,6 @@ export default function Overlay({ onClose, onApply, initialFilters }: OverlayPro
             </div>
         </div>
     );
-}
+};
+
+export default Overlay;
